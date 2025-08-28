@@ -1,16 +1,18 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
 
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
-import DemoComputer from '../components/DemoComputer.jsx';
+import ProtoplanetSystem from '../components/ProtoplanetSystem.jsx';
+import ProtoplanetControls from '../components/ProtoplanetControls.jsx';
 
 const projectCount = myProjects.length;
 
 const Projects = () => {
+  const protoplanetRef = useRef(null);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
 
   const handleNavigation = (direction) => {
@@ -87,7 +89,10 @@ const Projects = () => {
             <Center>
               <Suspense fallback={<CanvasLoader />}>
                 <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
-                  <DemoComputer texture={currentProject.texture} />
+                  <ProtoplanetSystem 
+                    texture={currentProject.texture}
+                    ref={protoplanetRef}
+                  />
                 </group>
               </Suspense>
             </Center>
@@ -95,6 +100,15 @@ const Projects = () => {
           </Canvas>
         </div>
       </div>
+      
+      {/* Protoplanet Controls */}
+      <ProtoplanetControls 
+        systemRef={protoplanetRef}
+        onParameterChange={(params) => {
+          // Handle parameter changes if needed
+          console.log('Parameters updated:', params);
+        }}
+      />
     </section>
   );
 };

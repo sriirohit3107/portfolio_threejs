@@ -23,10 +23,11 @@ const About = () => {
             <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
 
             <div>
-              <p className="grid-headtext">Hi, I’m Adrian Hajdin</p>
+              <p className="grid-headtext">Hi, I’m Srii Rohit Prakash</p>
               <p className="grid-subtext">
-                With 12 years of experience, I have honed my skills in both frontend and backend dev, creating dynamic
-                and responsive websites.
+              I am a Master’s student in Computer Science (AI track) at Binghamton University, specializing in AI/ML, data analytics, and full-stack development.
+I have experience building predictive models for healthcare and smart energy systems, along with AI-powered applications in finance and education.
+Passionate about developing scalable, interpretable AI solutions, I blend research rigor with practical engineering to drive real-world impact.
               </p>
             </div>
           </div>
@@ -39,8 +40,8 @@ const About = () => {
             <div>
               <p className="grid-headtext">Tech Stack</p>
               <p className="grid-subtext">
-                I specialize in a variety of languages, frameworks, and tools that allow me to build robust and scalable
-                applications
+              I specialize in Python, SQL, Java, C/C++, and JavaScript, along with frameworks like PyTorch, Scikit-learn, React.js, Node.js, and LangChain.
+              I also work with MongoDB, MySQL, PostgreSQL, Power BI, and Tableau, building robust, data-driven, and scalable applications.
               </p>
             </div>
           </div>
@@ -63,7 +64,7 @@ const About = () => {
             </div>
             <div>
               <p className="grid-headtext">I’m very flexible with time zone communications & locations</p>
-              <p className="grid-subtext">I&apos;m based in Rjieka, Croatia and open to remote work worldwide.</p>
+              <p className="grid-subtext">I&apos;m based in New York and open to remote jobs.</p>
               <Button name="Contact Me" isBeam containerClass="w-full mt-10" />
             </div>
           </div>
@@ -74,10 +75,12 @@ const About = () => {
             <img src="assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain" />
 
             <div>
-              <p className="grid-headtext">My Passion for Coding</p>
+              <p className="grid-headtext">My Passion for AI & Data</p>
               <p className="grid-subtext">
-                I love solving problems and building things through code. Programming isn&apos;t just my
-                profession—it&apos;s my passion. I enjoy exploring new technologies, and enhancing my skills.
+              I love solving complex problems and creating intelligent solutions 
+              through AI and data-driven methods. For me, technology isn’t just a 
+              skill it’s a way to build systems that make a real-world impact in healthcare, finance, and sustainability. 
+              I enjoy exploring new frameworks, experimenting with models, and constantly advancing my knowledge.
               </p>
             </div>
           </div>
