@@ -14,13 +14,7 @@ export const navLinks = [
     name: 'Work',
     href: '#work',
   },
-  {
-    id: 4,
-    name: 'Contact',
-    href: '#contact',
-  },
 ];
-
 
 export const myProjects = [
   {
@@ -28,7 +22,7 @@ export const myProjects = [
     desc: 'An AI-powered system to optimize monthly ad spend across Google, Meta, TikTok, and LinkedIn using benchmarks, industry modifiers, and goal-based optimization.',
     subdesc:
       'Built with FastAPI, React, Gemini API, and Monte Carlo simulations, it delivers transparent, source-cited recommendations and interactive scenario testing.',
-    href: 'https://github.com/sriirohit3107', // replace with actual repo/demo
+    href: 'https://budget-brain-djxl.vercel.app/',
     texture: '/textures/project/project1.mp4',
     logo: '/assets/project-logo1.png',
     logoStyle: {
@@ -38,9 +32,9 @@ export const myProjects = [
     },
     spotlight: '/assets/spotlight1.png',
     tags: [
-      { id: 1, name: 'FastAPI', path: '/assets/fastapi.png' },
+      { id: 1, name: 'FastAPI', path: '/assets/fastapi_logo.svg' },
       { id: 2, name: 'React.js', path: '/assets/react.svg' },
-      { id: 3, name: 'Gemini API', path: '/assets/api.png' },
+      { id: 3, name: 'Gemini API', path: '/assets/gemini_api_logo.svg' },
     ],
   },
   {
@@ -48,7 +42,7 @@ export const myProjects = [
     desc: 'A recommender system using heterogeneous academic graphs of students and courses, enhanced with explainable AI to provide interpretable course suggestions.',
     subdesc:
       'Developed with PyTorch Geometric, NetworkX, and MongoDB, integrating graph attribution and node similarity for explainable recommendations.',
-    href: 'https://github.com/sriirohit3107',
+    href: 'https://dsscourserecommendation.streamlit.app/',
     texture: '/textures/project/project2.mp4',
     logo: '/assets/project-logo2.png',
     logoStyle: {
@@ -58,18 +52,18 @@ export const myProjects = [
     },
     spotlight: '/assets/spotlight2.png',
     tags: [
-      { id: 1, name: 'PyTorch Geometric', path: '/assets/pytorch.png' },
-      { id: 2, name: 'NetworkX', path: '/assets/networkx.png' },
-      { id: 3, name: 'MongoDB', path: '/assets/mongodb.png' },
-      { id: 4, name: 'Streamlit', path: '/assets/streamlit.png' },
+      { id: 1, name: 'PyTorch Geometric', path: '/assets/pytorch_geometric_logo.svg' },
+      { id: 2, name: 'NetworkX', path: '/assets/networkx_logo.svg' },
+      { id: 3, name: 'MongoDB', path: '/assets/mongodb_logo.svg' },
+      { id: 4, name: 'Streamlit', path: '/assets/streamlit_logo.svg' },
     ],
   },
   {
     title: 'SmartFinancial AI – Stock Advisor',
     desc: 'An AI-powered stock advisor that forecasts short-term prices using LSTM and explains predictions with GPT-4 and LangChain.',
     subdesc:
-      'Full-stack system with Python, React, Node.js, and MongoDB. Integrates real-time stock quotes, financial news, and a conversational dashboard for “Buy/Sell/Hold” advice.',
-    href: 'https://github.com/sriirohit3107',
+      'Full-stack system with Python, React, Node.js, and MongoDB. Integrates real-time stock quotes, financial news, and a conversational dashboard for "Buy/Sell/Hold" advice.',
+    href: 'https://smartfinancialaiassistant.streamlit.app/',
     texture: '/textures/project/project3.mp4',
     logo: '/assets/project-logo3.png',
     logoStyle: {
@@ -79,10 +73,10 @@ export const myProjects = [
     },
     spotlight: '/assets/spotlight3.png',
     tags: [
-      { id: 1, name: 'LSTM', path: '/assets/pytorch.png' },
-      { id: 2, name: 'LangChain', path: '/assets/langchain.png' },
+      { id: 1, name: 'LSTM', path: '/assets/lstm_logo.svg' },
+      { id: 2, name: 'LangChain', path: '/assets/langchain.svg' },
       { id: 3, name: 'React.js', path: '/assets/react.svg' },
-      { id: 4, name: 'MongoDB', path: '/assets/mongodb.png' },
+      { id: 4, name: 'MongoDB', path: '/assets/mongodb_logo.svg' },
     ],
   },
   {
@@ -100,13 +94,12 @@ export const myProjects = [
     },
     spotlight: '/assets/spotlight4.png',
     tags: [
-      { id: 1, name: 'Python', path: '/assets/python.png' },
-      { id: 2, name: 'GNS-3', path: '/assets/gns3.png' },
-      { id: 3, name: 'Big Data', path: '/assets/bigdata.png' },
+      { id: 1, name: 'Python', path: '/assets/python.svg.svg' },
+      { id: 2, name: 'GNS-3', path: '/assets/gns3_logo.svg' },
+      { id: 3, name: 'Big Data', path: '/assets/bigdata_logo.svg' },
     ],
   },
 ];
-
 
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
   return {
@@ -124,8 +117,8 @@ export const workExperiences = [
     id: 1,
     name: 'Bridge Green Upcycle',
     pos: 'AI/ML Intern - Graduate Assistant',
-    duration: 'Juy 2025 - Present',
-    title: "At BGU, I work as a Graduate Assistant (AI/ML Intern) developing  predictive models for battery State-of-Health (SoH) and Remaining Useful Life (RUL) using real-time telemetry from Powin Centipede BMS. I design smart SoC prediction algorithms and build data pipelines that integrate AI-driven decision support into Smart BMS systems, improving battery efficiency and cycle life.",
+    duration: 'July 2025 - Present',
+    title: "At BGU, I work as a Graduate Assistant (AI/ML Intern) developing predictive models for battery State-of-Health (SoH) and Remaining Useful Life (RUL) using real-time telemetry from Powin Centipede BMS. I design smart SoC prediction algorithms and build data pipelines that integrate AI-driven decision support into Smart BMS systems, improving battery efficiency and cycle life.",
     icon: '/assets/bridge_green_upcycle_logo.jpeg',
     animation: 'victory',
   },
@@ -134,8 +127,19 @@ export const workExperiences = [
     name: 'Prompt Infotech',
     pos: 'Data Analyst Intern',
     duration: 'July 2023 - December 2023',
-    title: "  At Prompt Infotech, I worked as a Data Analyst Intern, where I performed end-to-end data cleaning, transformation, and exploratory analysis using SQL, Excel, and Python. I developed 5+ interactive Power BI dashboards for sales and marketing, enabling trend, cohort, and KPI analysis that directly supported multiple strategic business decisions. ",
+    title: "At Prompt Infotech, I worked as a Data Analyst Intern, where I performed end-to-end data cleaning, transformation, and exploratory analysis using SQL, Excel, and Python. I developed 5+ interactive Power BI dashboards for sales and marketing, enabling trend, cohort, and KPI analysis that directly supported multiple strategic business decisions.",
     icon: '/assets/prompt.avif',
     animation: 'clapping',
+  },
+];
+
+// ADD THE MISSING EXPORT HERE
+export const Research_Exp = [
+  {
+    id: 1,
+    name: 'Integrated Predictive and Causal Modeling for Metastasis in Colon Cancer Patients using National Inpatient Sample',
+    pos: 'Research Assistant',
+    duration: 'March 2025 - Present',
+    title: "Built a neural-network risk model (AUC 0.85) and a causal inference layer (PSM/IPW) to quantify the impact of comorbidities (e.g., obesity, diabetes) on metastatic presentation among >40M US inpatient discharges. Results support risk stratification, patient profiling, and operational planning. In parallel, integrated SEER (staging, lymph nodes) to validate labels and calibrate risk, producing portable formulas that combine HCUP- and SEER-aligned features for deployment to external datasets (e.g., Guthrie EHR) with documented transportability and calibration steps.",
   },
 ];

@@ -1,0 +1,46 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- NetworkX Logo -->
+  <defs>
+    <linearGradient id="networkxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1976D2"/>
+      <stop offset="100%" style="stop-color:#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF5722"/>
+      <stop offset="100%" style="stop-color:#D84315"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Network graph visualization -->
+  <g transform="translate(50, 30)">
+    <!-- Network nodes -->
+    <circle cx="100" cy="40" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="150" cy="20" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="200" cy="40" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="80" cy="80" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="150" cy="70" r="10" fill="url(#networkxGradient)" stroke="#0D47A1" stroke-width="2"/>
+    <circle cx="220" cy="80" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="120" cy="110" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    <circle cx="180" cy="110" r="8" fill="url(#nodeGrad)" stroke="#BF360C" stroke-width="2"/>
+    
+    <!-- Network edges -->
+    <line x1="100" y1="40" x2="150" y2="20" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="150" y1="20" x2="200" y2="40" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="100" y1="40" x2="80" y2="80" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="80" y1="80" x2="150" y2="70" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="150" y1="70" x2="200" y2="40" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="150" y1="70" x2="220" y2="80" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="120" y1="110" x2="150" y2="70" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="180" y1="110" x2="150" y2="70" stroke="url(#networkxGradient)" stroke-width="3"/>
+    <line x1="180" y1="110" x2="220" y2="80" stroke="url(#networkxGradient)" stroke-width="3"/>
+    
+    <!-- X pattern overlay -->
+    <path d="M30 20 L70 60 M70 20 L30 60" stroke="#FF5722" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M230 20 L270 60 M270 20 L230 60" stroke="#FF5722" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  </g>
+  
+  <!-- NetworkX Text -->
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="38" font-weight="bold" fill="url(#networkxGradient)" text-anchor="middle">Network</text>
+  <text x="280" y="160" font-family="Arial, sans-serif" font-size="38" font-weight="bold" fill="#FF5722">X</text>
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="14" fill="#666666" text-anchor="middle">Graph Analysis in Python</text>
+</svg>

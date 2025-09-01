@@ -7,7 +7,6 @@ import { Center, OrbitControls } from '@react-three/drei';
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import ProtoplanetSystem from '../components/ProtoplanetSystem.jsx';
-import ProtoplanetControls from '../components/ProtoplanetControls.jsx';
 
 const projectCount = myProjects.length;
 
@@ -33,7 +32,7 @@ const Projects = () => {
 
   return (
     <section className="c-space my-20">
-      <p className="head-text">My Selected Work</p>
+      <p className="head-text">My Project Works</p>
 
       <div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
         <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
@@ -101,14 +100,6 @@ const Projects = () => {
         </div>
       </div>
       
-      {/* Protoplanet Controls */}
-      <ProtoplanetControls 
-        systemRef={protoplanetRef}
-        onParameterChange={(params) => {
-          // Handle parameter changes if needed
-          console.log('Parameters updated:', params);
-        }}
-      />
     </section>
   );
 };

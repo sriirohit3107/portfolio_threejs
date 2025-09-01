@@ -1,0 +1,49 @@
+<svg width="500" height="400" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- LSTM neural network representation -->
+  <defs>
+    <linearGradient id="neuronGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Neural network structure -->
+  <g transform="translate(10,10) scale(7)">
+    <!-- Input layer -->
+    <circle cx="15" cy="30" r="8" fill="url(#neuronGradient)"/>
+    
+    <!-- LSTM cell (main) -->
+    <rect x="35" y="15" width="30" height="30" rx="5" fill="url(#neuronGradient)" stroke="#4338CA" stroke-width="2"/>
+    
+    <!-- Memory cell indicators -->
+    <circle cx="50" cy="22" r="2" fill="#FFFFFF"/>
+    <circle cx="50" cy="30" r="2" fill="#FFFFFF"/>
+    <circle cx="50" cy="38" r="2" fill="#FFFFFF"/>
+    
+    <!-- Output layer -->
+    <circle cx="85" cy="30" r="8" fill="url(#neuronGradient)"/>
+    
+    <!-- Connections -->
+    <path d="M23 30 L35 30" stroke="url(#connectionGradient)" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <path d="M65 30 L77 30" stroke="url(#connectionGradient)" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- Recurrent connection -->
+    <path d="M50 15 Q50 5, 35 5 Q25 5, 25 15 L30 20" stroke="url(#connectionGradient)" 
+          stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#06B6D4"/>
+    </marker>
+  </defs>
+  
+  <!-- Text -->
+  <text x="115" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4338CA">LSTM</text>
+  <text x="115" y="52" font-family="Arial, sans-serif" font-size="10" fill="#6B7280">Long Short-Term Memory</text>
+</svg>

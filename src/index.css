@@ -151,6 +151,26 @@ body {
   }
 }
 
+.research-arrow-btn {
+  /* Copy the styles from .arrow-btn and customize if needed */
+  /* For example: */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.research-arrow-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
 .waving-hand {
   animation-name: wave-animation;
   animation-duration: 2.5s;
