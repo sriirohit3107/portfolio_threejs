@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo, forwardRef, useImperativeHandle } from 'react';
+import { useRef, useEffect, useMemo, forwardRef, useImperativeHandle, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGSAP } from '@gsap/react';
 import * as THREE from 'three';
@@ -13,6 +13,7 @@ const ProtoplanetSystem = forwardRef((props, ref) => {
   const positionVariableRef = useRef();
   const velocityUniformsRef = useRef();
   const particleUniformsRef = useRef();
+  const [gpuComputeError, setGpuComputeError] = useState(false);
   
   const { gl, camera, scene } = useThree();
   
@@ -194,8 +195,9 @@ const ProtoplanetSystem = forwardRef((props, ref) => {
   const initComputeRenderer = () => {
     if (!gl || !camera) return;
 
-    const gpuCompute = new GPUComputationRenderer(WIDTH, WIDTH, gl);
-    gpuComputeRef.current = gpuCompute;
+    try {
+      const gpuCompute = new GPUComputationRenderer(WIDTH, WIDTH, gl);
+      gpuComputeRef.current = gpuCompute;
 
     const dtPosition = gpuCompute.createTexture();
     const dtVelocity = gpuCompute.createTexture();
@@ -218,6 +220,11 @@ const ProtoplanetSystem = forwardRef((props, ref) => {
     const error = gpuCompute.init();
     if (error !== null) {
       console.error('GPU Compute Error:', error);
+      setGpuComputeError(true);
+    }
+    } catch (error) {
+      console.error('Failed to initialize GPU computation:', error);
+      setGpuComputeError(true);
     }
   };
 
@@ -425,7 +432,7 @@ const ProtoplanetSystem = forwardRef((props, ref) => {
       <pointLight position={[0, 0, 100]} intensity={0.6} color="#3b82f6" />
       
       {/* Fallback simple particles if GPU compute fails */}
-      {!gpuComputeRef.current && (
+      {(gpuComputeError || !gpuComputeRef.current) && (
         <group>
           {Array.from({ length: 100 }, (_, i) => (
             <mesh

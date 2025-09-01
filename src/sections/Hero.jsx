@@ -1,6 +1,5 @@
 import { Leva } from 'leva';
 import { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
 import { useMediaQuery } from 'react-responsive';
 import { PerspectiveCamera } from '@react-three/drei';
 
@@ -11,6 +10,7 @@ import Button from '../components/Button.jsx';
 import NeuralNetwork from '../components/Target.jsx';
 import CanvasLoader from '../components/Loading.jsx';
 import AICamera from '../components/HeroCamera.jsx';
+import ClientOnlyCanvas from '../components/ClientOnlyCanvas.jsx';
 import { calculateSizes } from '../constants/index.js';
 import { TechWorkspace } from '../components/HackerRoom.jsx';
 
@@ -32,7 +32,7 @@ const Hero = () => {
       </div>
 
       <div className="w-full h-full absolute inset-0">
-        <Canvas className="w-full h-full">
+        <ClientOnlyCanvas className="w-full h-full">
           <Suspense fallback={<CanvasLoader />}>
             {/* To hide controller */}
             <Leva hidden />
@@ -52,7 +52,7 @@ const Hero = () => {
             <ambientLight intensity={1} />
             <directionalLight position={[10, 10, 10]} intensity={0.5} />
           </Suspense>
-        </Canvas>
+        </ClientOnlyCanvas>
       </div>
 
       <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">

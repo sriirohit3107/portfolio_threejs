@@ -1,12 +1,12 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Suspense, useState, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
 
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import ProtoplanetSystem from '../components/ProtoplanetSystem.jsx';
+import ClientOnlyCanvas from '../components/ClientOnlyCanvas.jsx';
 
 const projectCount = myProjects.length;
 
@@ -82,7 +82,7 @@ const Projects = () => {
         </div>
 
         <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
-          <Canvas>
+          <ClientOnlyCanvas>
             <ambientLight intensity={Math.PI} />
             <directionalLight position={[10, 10, 5]} />
             <Center>
@@ -96,7 +96,7 @@ const Projects = () => {
               </Suspense>
             </Center>
             <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
-          </Canvas>
+          </ClientOnlyCanvas>
         </div>
       </div>
       
