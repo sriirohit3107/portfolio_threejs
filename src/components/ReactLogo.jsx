@@ -7,25 +7,41 @@
 */
 
 import { Float, useGLTF } from '@react-three/drei';
+import { ErrorBoundary } from 'react-error-boundary';
+import ModelFallback from './ModelFallback';
 
 const ReactLogo = (props) => {
-  const { nodes, materials } = useGLTF('models/react.glb');
+  try {
+    const { nodes, materials } = useGLTF('/models/react.glb');
 
-  return (
-    <Float floatIntensity={1}>
-      <group position={[8, 8, 0]} scale={0.3} {...props} dispose={null}>
-        <mesh
-          geometry={nodes['React-Logo_Material002_0'].geometry}
-          material={materials['Material.002']}
-          position={[0, 0.079, 0.181]}
-          rotation={[0, 0, -Math.PI / 2]}
-          scale={[0.392, 0.392, 0.527]}
-        />
-      </group>
-    </Float>
-  );
+    return (
+      <Float floatIntensity={1}>
+        <group position={[8, 8, 0]} scale={0.3} {...props} dispose={null}>
+          <mesh
+            geometry={nodes['React-Logo_Material002_0'].geometry}
+            material={materials['Material.002']}
+            position={[0, 0.079, 0.181]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.392, 0.392, 0.527]}
+          />
+        </group>
+      </Float>
+    );
+  } catch (error) {
+    console.warn('ReactLogo model failed to load, using fallback:', error);
+    return (
+      <ModelFallback 
+        geometry="torus" 
+        size={[2, 0.5, 16, 100]} 
+        color="#61dafb" 
+        position={[8, 8, 0]} 
+        scale={0.3}
+        {...props} 
+      />
+    );
+  }
 };
 
-useGLTF.preload('models/react.glb');
+useGLTF.preload('/models/react.glb');
 
 export default ReactLogo;

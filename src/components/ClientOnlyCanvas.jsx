@@ -70,26 +70,28 @@ const ClientOnlyCanvas = ({ children, className, ...props }) => {
         }}
         dpr={[1, 2]} // Limit device pixel ratio for better performance
         performance={{ min: 0.5 }} // Reduce quality if performance is poor
-        onCreated={({ gl }) => {
-          // Configure WebGL context
-          gl.setClearColor('#0a0a0a', 1.0);
-          gl.shadowMap.enabled = true;
-          gl.shadowMap.type = 2; // THREE.PCFSoftShadowMap
-          
-          // Handle context lost/restored
-          const canvas = gl.domElement;
-          
-          canvas.addEventListener('webglcontextlost', (event) => {
-            console.warn('WebGL context lost');
-            event.preventDefault();
-          });
-          
-          canvas.addEventListener('webglcontextrestored', () => {
-            console.log('WebGL context restored');
-            // Force re-render
-            window.location.reload();
-          });
-        }}
+                 onCreated={({ gl }) => {
+           // Configure WebGL context
+           gl.setClearColor('#0a0a0a', 1.0);
+           gl.shadowMap.enabled = true;
+           gl.shadowMap.type = 2; // THREE.PCFSoftShadowMap
+           
+           // Handle context lost/restored
+           const canvas = gl.domElement;
+           
+           if (canvas) {
+             canvas.addEventListener('webglcontextlost', (event) => {
+               console.warn('WebGL context lost');
+               event.preventDefault();
+             });
+             
+             canvas.addEventListener('webglcontextrestored', () => {
+               console.log('WebGL context restored');
+               // Force re-render
+               window.location.reload();
+             });
+           }
+         }}
         {...props}
       >
         {children}

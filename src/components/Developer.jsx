@@ -9,13 +9,15 @@ import { useGraph } from '@react-three/fiber';
 import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
 import { SkeletonUtils } from 'three-stdlib';
 import * as THREE from 'three';
+import ModelFallback from './ModelFallback';
 
 const Developer = ({ animationName = 'idle', ...props }) => {
   const group = useRef();
 
-  const { scene } = useGLTF('/models/animations/developer.glb');
-  const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const { nodes, materials } = useGraph(clone);
+  try {
+    const { scene } = useGLTF('/models/animations/developer.glb');
+    const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
+    const { nodes, materials } = useGraph(clone);
 
   // Enhance materials for normal skin, long hair, and coat suit dress
   useEffect(() => {
@@ -263,6 +265,19 @@ const Developer = ({ animationName = 'idle', ...props }) => {
       />
     </group>
   );
+  } catch (error) {
+    console.warn('Developer model failed to load, using fallback:', error);
+    return (
+      <ModelFallback 
+        geometry="cylinder" 
+        size={[0.5, 2, 8]} 
+        color="#8B4513" 
+        position={[0, 0, 0]} 
+        scale={1}
+        {...props} 
+      />
+    );
+  }
 };
 
 useGLTF.preload('/models/animations/developer.glb');
