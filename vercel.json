@@ -31,6 +31,10 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     },
@@ -44,22 +48,26 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/models/(.*)",
-      "destination": "/models/$1"
+      "src": "/models/(.*)",
+      "dest": "/models/$1"
     },
     {
-      "source": "/textures/(.*)",
-      "destination": "/textures/$1"
+      "src": "/textures/(.*)",
+      "dest": "/textures/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

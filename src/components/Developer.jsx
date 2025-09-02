@@ -9,277 +9,201 @@ import { useGraph } from '@react-three/fiber';
 import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
 import { SkeletonUtils } from 'three-stdlib';
 import * as THREE from 'three';
-import ModelFallback from './ModelFallback';
+import VercelSafeModelLoader from './VercelSafeModelLoader';
 
 const Developer = ({ animationName = 'idle', ...props }) => {
   const group = useRef();
 
-  try {
-    const { scene } = useGLTF('/models/animations/developer.glb');
-    const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
-    const { nodes, materials } = useGraph(clone);
-
-  // Enhance materials for normal skin, long hair, and coat suit dress
-  useEffect(() => {
-    // Normal skin tone
-    if (materials.Wolf3D_Skin) {
-      materials.Wolf3D_Skin.color.setHex(0xF5DEB3); // Wheat color for normal skin tone
-      materials.Wolf3D_Skin.roughness = 0.7;
-      materials.Wolf3D_Skin.metalness = 0.1;
-    }
-    
-    // Long hair styling - create a new material for better hair appearance
-    if (materials.Wolf3D_Hair) {
-      // Create a new hair material for better control
-      const hairMaterial = new THREE.MeshStandardMaterial({
-        color: 0x8B4513, // Saddle brown for rich hair color
-        roughness: 0.9,
-        metalness: 0.05,
-        envMapIntensity: 0.2,
-        transparent: true,
-        opacity: 0.9,
-        side: THREE.DoubleSide
-      });
-      
-      // Store the new material for use in hair meshes
-      materials.Wolf3D_Hair = hairMaterial;
-    }
-    
-    // Coat suit dress styling
-    if (materials.Wolf3D_Outfit_Top) {
-      materials.Wolf3D_Outfit_Top.color.setHex(0x2F4F4F); // Dark slate gray for formal suit
-      materials.Wolf3D_Outfit_Top.roughness = 0.2;
-      materials.Wolf3D_Outfit_Top.metalness = 0.1;
-    }
-    
-    if (materials.Wolf3D_Outfit_Bottom) {
-      materials.Wolf3D_Outfit_Bottom.color.setHex(0x2F4F4F); // Matching dark slate gray
-      materials.Wolf3D_Outfit_Bottom.roughness = 0.2;
-      materials.Wolf3D_Outfit_Bottom.metalness = 0.1;
-    }
-  }, [materials.Wolf3D_Skin, materials.Wolf3D_Hair, materials.Wolf3D_Outfit_Top, materials.Wolf3D_Outfit_Bottom]);
-
-  const { animations: idleAnimation } = useFBX('/models/animations/idle.fbx');
-  const { animations: saluteAnimation } = useFBX('/models/animations/salute.fbx');
-  const { animations: clappingAnimation } = useFBX('/models/animations/clapping.fbx');
-  const { animations: victoryAnimation } = useFBX('/models/animations/victory.fbx');
-
-  idleAnimation[0].name = 'idle';
-  saluteAnimation[0].name = 'salute';
-  clappingAnimation[0].name = 'clapping';
-  victoryAnimation[0].name = 'victory';
-
-  const { actions } = useAnimations(
-    [idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0]],
-    group,
-  );
-
-  useEffect(() => {
-    if (actions && actions[animationName]) {
-      actions[animationName].reset().fadeIn(0.5).play();
-      return () => actions[animationName].fadeOut(0.5);
-    }
-  }, [actions, animationName]);
-
   return (
-    <group ref={group} {...props} dispose={null}>
-      <primitive object={nodes.Hips} />
-      
-      {/* Long Flowing Hair - Base Layer */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.2, 2.0, 1.2]}
-        position={[0, -0.4, 0]}
-      />
-      
-      {/* Long Hair - Middle Layer */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.15, 1.8, 1.15]}
-        position={[0, -0.3, 0]}
-        opacity={0.8}
-        transparent
-      />
-      
-      {/* Long Hair - Top Layer */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.1, 1.6, 1.1]}
-        position={[0, -0.2, 0]}
-        opacity={0.6}
-        transparent
-      />
-      
-      {/* Hair Flow - Side Layers */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.1, 1.7, 1.1]}
-        position={[0.1, -0.25, 0]}
-        opacity={0.7}
-        transparent
-      />
-      
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.1, 1.7, 1.1]}
-        position={[-0.1, -0.25, 0]}
-        opacity={0.7}
-        transparent
-      />
-      
-      {/* Additional Hair Volume Layers */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.05, 1.9, 1.05]}
-        position={[0, -0.35, 0]}
-        opacity={0.5}
-        transparent
-      />
-      
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.08, 1.75, 1.08]}
-        position={[0.05, -0.28, 0]}
-        opacity={0.6}
-        transparent
-      />
-      
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Hair.geometry}
-        material={materials.Wolf3D_Hair}
-        skeleton={nodes.Wolf3D_Hair.skeleton}
-        scale={[1.08, 1.75, 1.08]}
-        position={[-0.05, -0.28, 0]}
-        opacity={0.6}
-        transparent
-      />
-      
-      {/* Additional Hair Volume Layers */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Glasses.geometry}
-        material={materials.Wolf3D_Glasses}
-        skeleton={nodes.Wolf3D_Glasses.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Body.geometry}
-        material={materials.Wolf3D_Body}
-        skeleton={nodes.Wolf3D_Body.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
-        material={materials.Wolf3D_Outfit_Bottom}
-        skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
-      />
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
-        material={materials.Wolf3D_Outfit_Footwear}
-        skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
-      />
-      
-      {/* Formal Coat Suit Dress */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Top.geometry}
-        material={materials.Wolf3D_Outfit_Top}
-        skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
-        scale={[1.05, 1.1, 1.05]}
-      />
-      
-      {/* Coat Suit Dress Overlay */}
-      <skinnedMesh
-        geometry={nodes.Wolf3D_Outfit_Top.geometry}
-        material={materials.Wolf3D_Outfit_Top}
-        skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
-        scale={[1.03, 1.08, 1.03]}
-        position={[0, 0.02, 0]}
-        opacity={0.8}
-        transparent
-      />
-      
-      <skinnedMesh
-        name="EyeLeft"
-        geometry={nodes.EyeLeft.geometry}
-        material={materials.Wolf3D_Eye}
-        skeleton={nodes.EyeLeft.skeleton}
-        morphTargetDictionary={nodes.EyeLeft.morphTargetDictionary}
-        morphTargetInfluences={nodes.EyeLeft.morphTargetInfluences}
-      />
-      <skinnedMesh
-        name="EyeRight"
-        geometry={nodes.EyeRight.geometry}
-        material={materials.Wolf3D_Eye}
-        skeleton={nodes.EyeRight.skeleton}
-        morphTargetDictionary={nodes.EyeRight.morphTargetDictionary}
-        morphTargetInfluences={nodes.EyeRight.morphTargetInfluences}
-      />
-      
-      <skinnedMesh
-        name="Wolf3D_Head"
-        geometry={nodes.Wolf3D_Head.geometry}
-        material={materials.Wolf3D_Skin}
-        skeleton={nodes.Wolf3D_Head.skeleton}
-        morphTargetDictionary={nodes.Wolf3D_Head.morphTargetDictionary}
-        morphTargetInfluences={nodes.Wolf3D_Head.morphTargetInfluences}
-      />
-      
-      {/* Professional Tie */}
-      <mesh position={[0, -0.3, 0.1]} scale={[0.12, 0.35, 0.02]}>
-        <boxGeometry />
-        <meshStandardMaterial 
-          color="#8B0000" 
-          roughness={0.3}
-          metalness={0.1}
-        />
-      </mesh>
-      
-      {/* Tie Knot */}
-      <mesh position={[0, -0.1, 0.1]} scale={[0.1, 0.06, 0.02]}>
-        <boxGeometry />
-        <meshStandardMaterial 
-          color="#8B0000" 
-          roughness={0.3}
-          metalness={0.1}
-        />
-      </mesh>
-      
-      <skinnedMesh
-        name="Wolf3D_Teeth"
-        geometry={nodes.Wolf3D_Teeth.geometry}
-        material={materials.Wolf3D_Teeth}
-        skeleton={nodes.Wolf3D_Teeth.skeleton}
-        morphTargetDictionary={nodes.Wolf3D_Teeth.morphTargetDictionary}
-        morphTargetInfluences={nodes.Wolf3D_Teeth.morphTargetInfluences}
-      />
-    </group>
-  );
-  } catch (error) {
-    console.warn('Developer model failed to load, using fallback:', error);
-    return (
-      <ModelFallback 
-        geometry="cylinder" 
-        size={[0.5, 2, 8]} 
-        color="#8B4513" 
-        position={[0, 0, 0]} 
-        scale={1}
-        {...props} 
-      />
-    );
-  }
-};
+    <VercelSafeModelLoader
+      modelPath="/models/animations/developer.glb"
+      fallbackGeometry="cylinder"
+      fallbackSize={[0.5, 2, 8]}
+      fallbackColor="#8B4513"
+      position={[0, 0, 0]}
+      scale={1}
+      {...props}
+    >
+      {({ scene }) => {
+        const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
+        const { nodes, materials } = useGraph(clone);
 
-useGLTF.preload('/models/animations/developer.glb');
+        // Enhance materials for normal skin, long hair, and coat suit dress
+        useEffect(() => {
+          // Normal skin tone
+          if (materials.Wolf3D_Skin) {
+            materials.Wolf3D_Skin.color.setHex(0xF5DEB3); // Wheat color for normal skin tone
+            materials.Wolf3D_Skin.roughness = 0.7;
+            materials.Wolf3D_Skin.metalness = 0.1;
+          }
+          
+          // Long hair styling - create a new material for better hair appearance
+          if (materials.Wolf3D_Hair) {
+            // Create a new material for hair with better properties
+            const hairMaterial = new THREE.MeshStandardMaterial({
+              color: 0x8B4513, // Rich saddle brown color
+              roughness: 0.8,
+              metalness: 0.1,
+              side: THREE.DoubleSide, // Ensure hair renders from all angles
+            });
+            materials.Wolf3D_Hair = hairMaterial;
+          }
+
+          // Coat suit styling - dark professional look
+          if (materials.Wolf3D_Outfit_Top) {
+            materials.Wolf3D_Outfit_Top.color.setHex(0x2F4F4F); // Dark slate gray
+            materials.Wolf3D_Outfit_Top.roughness = 0.6;
+            materials.Wolf3D_Outfit_Top.metalness = 0.2;
+          }
+
+          if (materials.Wolf3D_Outfit_Bottom) {
+            materials.Wolf3D_Outfit_Bottom.color.setHex(0x2F4F4F); // Dark slate gray
+            materials.Wolf3D_Outfit_Bottom.roughness = 0.6;
+            materials.Wolf3D_Outfit_Bottom.metalness = 0.2;
+          }
+        }, [materials]);
+
+        // Load animations
+        const { actions } = useAnimations([
+          useFBX('/models/animations/idle.fbx'),
+          useFBX('/models/animations/clapping.fbx'),
+          useFBX('/models/animations/salute.fbx'),
+          useFBX('/models/animations/victory.fbx')
+        ], group);
+
+        // Play animation
+        useEffect(() => {
+          if (actions && actions[animationName]) {
+            actions[animationName].reset().fadeIn(0.5).play();
+            return () => actions[animationName].fadeOut(0.5);
+          }
+        }, [actions, animationName]);
+
+        return (
+          <group ref={group} {...props} dispose={null}>
+            <primitive object={nodes.Hips} />
+            
+            {/* Long Flowing Hair - Base Layer */}
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Hair.geometry}
+              material={materials.Wolf3D_Hair}
+              skeleton={nodes.Wolf3D_Hair.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Hair.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Hair.morphTargetInfluences}
+              scale={[1.2, 1.3, 1.1]}
+              position={[0, 0.1, 0]}
+            />
+            
+            {/* Long Flowing Hair - Additional Volume Layer */}
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Hair.geometry}
+              material={materials.Wolf3D_Hair}
+              skeleton={nodes.Wolf3D_Hair.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Hair.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Hair.morphTargetInfluences}
+              scale={[1.1, 1.2, 1.05]}
+              position={[0, 0.05, 0]}
+              material-transparent={true}
+              material-opacity={0.8}
+            />
+            
+            {/* Long Flowing Hair - Top Layer for Extra Length */}
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Hair.geometry}
+              material={materials.Wolf3D_Hair}
+              skeleton={nodes.Wolf3D_Hair.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Hair.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Hair.morphTargetInfluences}
+              scale={[1.15, 1.4, 1.08]}
+              position={[0, 0.15, 0]}
+              material-transparent={true}
+              material-opacity={0.6}
+            />
+
+            {/* Suit Jacket Layer */}
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Outfit_Top.geometry}
+              material={materials.Wolf3D_Outfit_Top}
+              skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Outfit_Top.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Outfit_Top.morphTargetInfluences}
+              scale={[1.05, 1.02, 1.03]}
+              position={[0, 0.02, 0]}
+            />
+
+            {/* Tie */}
+            <mesh position={[0, 0.8, 0.15]}>
+              <boxGeometry args={[0.1, 0.8, 0.05]} />
+              <meshStandardMaterial color={0x8B0000} />
+            </mesh>
+
+            {/* Tie Knot */}
+            <mesh position={[0, 1.1, 0.18]}>
+              <boxGeometry args={[0.15, 0.15, 0.08]} />
+              <meshStandardMaterial color={0x8B0000} />
+            </mesh>
+
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Body.geometry}
+              material={materials.Wolf3D_Body}
+              skeleton={nodes.Wolf3D_Body.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Body.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Body.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
+              material={materials.Wolf3D_Outfit_Bottom}
+              skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Outfit_Bottom.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Outfit_Bottom.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Outfit_Top.geometry}
+              material={materials.Wolf3D_Outfit_Top}
+              skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Outfit_Top.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Outfit_Top.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Skin.geometry}
+              material={materials.Wolf3D_Skin}
+              skeleton={nodes.Wolf3D_Skin.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Skin.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Skin.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_EyeLeft.geometry}
+              material={materials.Wolf3D_EyeLeft}
+              skeleton={nodes.Wolf3D_EyeLeft.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_EyeLeft.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_EyeLeft.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_EyeRight.geometry}
+              material={materials.Wolf3D_EyeRight}
+              skeleton={nodes.Wolf3D_EyeRight.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_EyeRight.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_EyeRight.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Glasses.geometry}
+              material={materials.Wolf3D_Glasses}
+              skeleton={nodes.Wolf3D_Glasses.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Glasses.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Glasses.morphTargetInfluences}
+            />
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Teeth.geometry}
+              material={materials.Wolf3D_Teeth}
+              skeleton={nodes.Wolf3D_Teeth.skeleton}
+              morphTargetDictionary={nodes.Wolf3D_Teeth.morphTargetDictionary}
+              morphTargetInfluences={nodes.Wolf3D_Teeth.morphTargetInfluences}
+            />
+          </group>
+        );
+      }}
+    </VercelSafeModelLoader>
+  );
+};
 
 export default Developer;
